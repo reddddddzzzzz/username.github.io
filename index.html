@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <style>
+        /* Modern color scheme and fonts */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --background-color: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        article {
+            overflow: hidden;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 3rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            header {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            article {
+                padding: 1rem;
+            }
+        }
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+        }
+
+        .toggle-btn {
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid white;
+            background-color: transparent;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .food-list, .drink-list {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .secret-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+        }
+
+        .secret-btn:hover {
+            opacity: 0.3;
+        }
+
+        .social-links {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .social-links h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background-color: var(--secondary-color);
+        }
+
+        .social-links i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Specific styling for social icons */
+        .fa-youtube {
+            color: #FF0000;
+        }
+
+        .fa-tiktok {
+            color: #FFFFFF;
+        }
+
+        .video-section {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+        }
+
+        .video-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .tiktok-embed-container {
+            position: relative;
+            width: 100%;
+            max-width: 325px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .video-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+    <!-- Add this in the head section for Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Top 5 Best Foods & Drinks in the World</h1>
+        <button id="toggleButton" class="toggle-btn">Switch to Drinks</button>
+    </header>
+    <main>
+        <section id="foodSection" class="food-list">
+            <article>
+                <h2>1. Pizza</h2>
+                <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=800&auto=format&fit=crop" 
+                     alt="Delicious pizza with melted cheese and basil">
+                <p>A beloved Italian dish featuring a perfect combination of crispy crust, melted cheese, savory tomato sauce, and endless topping possibilities.</p>
+            </article>
+
+            <article>
+                <h2>2. Sushi</h2>
+                <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800&auto=format&fit=crop" 
+                     alt="Assorted sushi rolls">
+                <p>Fresh Japanese delicacy combining perfectly seasoned rice with raw fish, vegetables, and seaweed, creating a harmonious blend of flavors and textures.</p>
+            </article>
+
+            <article>
+                <h2>3. Tacos</h2>
+                <img src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=800&auto=format&fit=crop" 
+                     alt="Street tacos with garnish">
+                <p>Mexican street food perfection with soft or crispy tortillas filled with seasoned meats, fresh vegetables, and zesty salsas.</p>
+            </article>
+
+            <article>
+                <h2>4. Skibidi Toilet</h2>
+                <img src="https://i.ytimg.com/vi/09GzKVCdCoc/maxresdefault.jpg?w=800&auto=format&fit=crop" 
+                     alt="Skibidi toilet camera man">
+                <p>GYATTTT! 🚽 The most iconic meal in Ohio, featuring the legendary camera man who records peak rizz moments. No cap fr fr, this meal hits different and goes absolutely bonkers. Titan approved! 📸</p>
+            </article>
+
+            <article>
+                <h2>5. Chocolate Cake</h2>
+                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&auto=format&fit=crop" 
+                     alt="Rich chocolate cake with frosting">
+                <p>Rich, moist, and decadent dessert that satisfies any sweet tooth with its perfect balance of chocolate flavors.</p>
+            </article>
+        </section>
+
+        <section id="drinkSection" class="drink-list" style="display: none;">
+            <article>
+                <h2>1. Water</h2>
+                <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&auto=format&fit=crop" 
+                     alt="Pure, clear water with ice cubes">
+                <p>The essential drink for life, pure water is the most important beverage for hydration, health, and wellness. Zero calories, zero sugar, just pure refreshment.</p>
+            </article>
+
+            <article>
+                <h2>2. Milk</h2>
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=800&auto=format&fit=crop" 
+                     alt="Fresh glass of milk">
+                <p>A nutrient-rich beverage packed with calcium, protein, and vitamins, essential for strong bones and overall health.</p>
+            </article>
+
+            <article>
+                <h2>3. Fresh Orange Juice</h2>
+                <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=800&auto=format&fit=crop" 
+                     alt="Glass of fresh orange juice">
+                <p>Nature's perfect breakfast drink, bursting with vitamin C and bright citrus flavors.</p>
+            </article>
+
+            <article>
+                <h2>4. Apple Juice</h2>
+                <img src="https://people.com/thmb/JhhcBFfAOmM2tJ4dKfe-VmsNRIc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():focal(749x0:751x2)/apple-juice-recall-tout-091124-abf6bb93d354486f9e84b56cddbc596d.jpg?w=800&auto=format&fit=crop" 
+                     alt="Glass of fresh apple juice">
+                <p>Sweet and refreshing juice made from pressed apples, rich in antioxidants and natural fruit sugars.</p>
+            </article>
+
+            <article>
+                <h2>5. Soda</h2>
+                <img src="https://www.fodors.com/wp-content/uploads/2019/03/HERO_Worlds_Best_Soda_Bundaberg_shutterstock_679079920.jpg?w=800&auto=format&fit=crop" 
+                     alt="Glass of fizzy soda with ice">
+                <p>The world's most popular carbonated beverage, offering a refreshing fizzy sensation with its unique blend of flavors.</p>
+            </article>
+        </section>
+    </main>
+    
+    <section class="social-links">
+        <h2>Socials</h2>
+        <div>
+            <a href="https://www.youtube.com/@reddddzzz" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://www.tiktok.com/@reddzzz4" target="_blank">
+                <i class="fab fa-tiktok"></i> TikTok
+            </a>
+        </div>
+    </section>
+
+    <!-- Add this after the social-links section and before the footer -->
+    <section class="video-section">
+        <h2>Latest Brainrot Video from Your Boy</h2>
+        <div class="tiktok-embed-container">
+            <blockquote class="tiktok-embed" 
+                cite="https://www.tiktok.com/@reddzzz4/video/7428791074950352136" 
+                data-video-id="7428791074950352136">
+                <section>
+                    <a target="_blank" href="https://www.tiktok.com/@reddzzz4"></a>
+                </section>
+            </blockquote>
+            <script async src="https://www.tiktok.com/embed.js"></script>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; Skibidi toilet ohio gyat rizz fanum tax. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const foodSection = document.getElementById('foodSection');
+        const drinkSection = document.getElementById('drinkSection');
+
+        toggleButton.addEventListener('click', () => {
+            if (foodSection.style.display !== 'none') {
+                foodSection.style.display = 'none';
+                drinkSection.style.display = 'block';
+                toggleButton.textContent = 'Switch to Foods';
+            } else {
+                foodSection.style.display = 'block';
+                drinkSection.style.display = 'none';
+                toggleButton.textContent = 'Switch to Drinks';
+            }
+        });
+    </script>
+
+    <button class="secret-btn" onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'" title="🤫">
+        🎵
+    </button>
+</body>
+</html>
